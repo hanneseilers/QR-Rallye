@@ -1,8 +1,8 @@
 <?php
 
-$dbDatabase = "35110m24661_3";
-$dbUser = "35110m24661_3";
-$dbPassword = "maxdxFni";
+$dbDatabase = "DBNAME";
+$dbUser = "user";
+$dbPassword = "password";
 $dbHost = "localhost";
 $log_enabled = false;
 

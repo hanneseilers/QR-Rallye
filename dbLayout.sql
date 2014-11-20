@@ -2,16 +2,16 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-DROP SCHEMA IF EXISTS `35110m24661_3` ;
-CREATE SCHEMA IF NOT EXISTS `35110m24661_3` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
-USE `35110m24661_3` ;
+DROP SCHEMA IF EXISTS `DBNAME` ;
+CREATE SCHEMA IF NOT EXISTS `DBNAME` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
+USE `DBNAME` ;
 
 -- -----------------------------------------------------
--- Table `35110m24661_3`.`qr_ralleys`
+-- Table `DBNAME`.`qr_ralleys`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `35110m24661_3`.`qr_ralleys` ;
+DROP TABLE IF EXISTS `DBNAME`.`qr_ralleys` ;
 
-CREATE TABLE IF NOT EXISTS `35110m24661_3`.`qr_ralleys` (
+CREATE TABLE IF NOT EXISTS `DBNAME`.`qr_ralleys` (
   `rID` INT NOT NULL AUTO_INCREMENT,
   `rName` TEXT NOT NULL,
   `rStart` TIMESTAMP NULL,
@@ -24,11 +24,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `35110m24661_3`.`qr_items`
+-- Table `DBNAME`.`qr_items`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `35110m24661_3`.`qr_items` ;
+DROP TABLE IF EXISTS `DBNAME`.`qr_items` ;
 
-CREATE TABLE IF NOT EXISTS `35110m24661_3`.`qr_items` (
+CREATE TABLE IF NOT EXISTS `DBNAME`.`qr_items` (
   `iID` INT NOT NULL AUTO_INCREMENT,
   `iSnippets` LONGTEXT NOT NULL,
   `iSolution` LONGTEXT NOT NULL,
@@ -39,11 +39,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `35110m24661_3`.`qr_groups`
+-- Table `DBNAME`.`qr_groups`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `35110m24661_3`.`qr_groups` ;
+DROP TABLE IF EXISTS `DBNAME`.`qr_groups` ;
 
-CREATE TABLE IF NOT EXISTS `35110m24661_3`.`qr_groups` (
+CREATE TABLE IF NOT EXISTS `DBNAME`.`qr_groups` (
   `gID` INT NOT NULL AUTO_INCREMENT,
   `gName` LONGTEXT NULL,
   `gHash` MEDIUMTEXT NOT NULL,
@@ -52,11 +52,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `35110m24661_3`.`qr_ralleys_has_items`
+-- Table `DBNAME`.`qr_ralleys_has_items`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `35110m24661_3`.`qr_ralleys_has_items` ;
+DROP TABLE IF EXISTS `DBNAME`.`qr_ralleys_has_items` ;
 
-CREATE TABLE IF NOT EXISTS `35110m24661_3`.`qr_ralleys_has_items` (
+CREATE TABLE IF NOT EXISTS `DBNAME`.`qr_ralleys_has_items` (
   `qr_ralleys_rID` INT NOT NULL,
   `qr_items_iID` INT NOT NULL,
   PRIMARY KEY (`qr_ralleys_rID`, `qr_items_iID`),
@@ -64,23 +64,23 @@ CREATE TABLE IF NOT EXISTS `35110m24661_3`.`qr_ralleys_has_items` (
   INDEX `fk_qr_ralleys_has_qr_items_qr_ralleys_idx` (`qr_ralleys_rID` ASC),
   CONSTRAINT `fk_qr_ralleys_has_qr_items_qr_ralleys`
     FOREIGN KEY (`qr_ralleys_rID`)
-    REFERENCES `35110m24661_3`.`qr_ralleys` (`rID`)
+    REFERENCES `DBNAME`.`qr_ralleys` (`rID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_qr_ralleys_has_qr_items_qr_items1`
     FOREIGN KEY (`qr_items_iID`)
-    REFERENCES `35110m24661_3`.`qr_items` (`iID`)
+    REFERENCES `DBNAME`.`qr_items` (`iID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `35110m24661_3`.`qr_groups_solved_items`
+-- Table `DBNAME`.`qr_groups_solved_items`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `35110m24661_3`.`qr_groups_solved_items` ;
+DROP TABLE IF EXISTS `DBNAME`.`qr_groups_solved_items` ;
 
-CREATE TABLE IF NOT EXISTS `35110m24661_3`.`qr_groups_solved_items` (
+CREATE TABLE IF NOT EXISTS `DBNAME`.`qr_groups_solved_items` (
   `qr_groups_gID` INT NOT NULL,
   `qr_items_iID` INT NOT NULL,
   `giSolvedAt` TIMESTAMP NULL,
@@ -89,12 +89,12 @@ CREATE TABLE IF NOT EXISTS `35110m24661_3`.`qr_groups_solved_items` (
   INDEX `fk_qr_groups_has_qr_items_qr_groups1_idx` (`qr_groups_gID` ASC),
   CONSTRAINT `fk_qr_groups_has_qr_items_qr_groups1`
     FOREIGN KEY (`qr_groups_gID`)
-    REFERENCES `35110m24661_3`.`qr_groups` (`gID`)
+    REFERENCES `DBNAME`.`qr_groups` (`gID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_qr_groups_has_qr_items_qr_items1`
     FOREIGN KEY (`qr_items_iID`)
-    REFERENCES `35110m24661_3`.`qr_items` (`iID`)
+    REFERENCES `DBNAME`.`qr_items` (`iID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
