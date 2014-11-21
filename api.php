@@ -112,7 +112,7 @@ function getPendingSnipped($rID, $gHash, $gName, $snippedNr){
 					if( $snippedNr != null && sizeof($vSnippets) > $snippedNr )
 						return $vSnippets[$snippedNr];
 					else
-						status($SNIPPET_EOA);
+						status($SNIPPET_TIMEOUT);
 				}
 			} else {
 				status($SNIPPET_NOT_ONLINE);
