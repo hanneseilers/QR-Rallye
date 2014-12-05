@@ -23,17 +23,17 @@
 				<td>Rallye Start:</td>
 				<td><input type="text" name="rStart" /> [YYYY-MM-DD hh:mm:ss]</td>
 			</tr>
-			<tr>
-				<td>Rallye End:</td>
-				<td><input type="text" name="rEnd" /> [YYYY-MM-DD hh:mm:ss]</td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td>Rallye End:</td> -->
+<!-- 				<td><input type="text" name="rEnd" /> [YYYY-MM-DD hh:mm:ss]</td> -->
+<!-- 			</tr> -->
 			<tr>
 				<td>Snippets delay:</td>
 				<td><input type="text" name="rSnippetsDelay" /> [sec.]</td>
 			</tr>
-			<tr>
-				<td colspan="2"><b>Administration</b></td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td colspan="2"><b>Administration</b></td> -->
+<!-- 			</tr> -->
 			<tr>
 				<td>E-MaiL*:</td>
 				<td><input type="text" name="rMail" value="test@mail.com"/></td>

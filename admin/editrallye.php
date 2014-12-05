@@ -154,10 +154,10 @@ if( isset($_POST['updateItem']) ){
 					$iStart = $_POST['iStart'];
 				}
 				
-				$iEnd = $vItem['iEnd'];
-				if( isset($_POST['iEnd']) && strlen($_POST['iEnd']) == 19 ){
-					$iEnd = $_POST['iEnd'];
-				}
+ 				$iEnd = $vItem['iEnd'];
+// 				if( isset($_POST['iEnd']) && strlen($_POST['iEnd']) == 19 ){
+// 					$iEnd = $_POST['iEnd'];
+// 				}
 				
 				$sql = "UPDATE qr_items SET "
 						."iSnippets = '".$iSnippets."',"
@@ -199,7 +199,7 @@ if( isset($_POST['edit']) || isset($_POST['update'])
 				tableStart();
 				tableRow( "Rallye Name*:",  fInput("rNewName", $vRallye['rName']) );
 				tableRow( "Rallye Start:", fInput("rStart", $vRallye['rStart']), "[YYYY-MM-DD hh:mm:ss]" );
-				tableRow( "Rallye End:", fInput("rEnd", $vRallye['rEnd']), "[YYYY-MM-DD hh:mm:ss]" );
+// 				tableRow( "Rallye End:", fInput("rEnd", $vRallye['rEnd']), "[YYYY-MM-DD hh:mm:ss]" );
 				tableRow( "Snippets delay:", fInput("rSnippetsDelay", $vRallye['rSnippetsDelay']) );
 				tableRow( "E-Mail*: ", fInput("rNewMail", $vRallye['rMail']) );
 				tableRow( "New Password: ", fInput("rNewPassword", "", "password") );
@@ -250,8 +250,9 @@ function showItems($rallye){
 					tableStart();
 					tableRow4( 	"Snippets:", fInput("iSnippets", $vItem['iSnippets']),
 								"Solution:",  fInput("iSolution", $vItem['iSolution']) );
-					tableRow4(	"Start:", fInput("iStart", $vItem['iStart']),
-								"End:", fInput("iEnd", $vItem['iEnd']) );
+// 					tableRow4(	"Start:", fInput("iStart", $vItem['iStart']),
+// 								"End:", fInput("iEnd", $vItem['iEnd']) );
+					tableRow4(	"Start:", fInput("iStart", $vItem['iStart']) );
 					tableRow4( fInput("removeItem", "remove" ,"checkbox")."Remove item" );
 					tableRow4( fInput("updateItem", "Update", "submit") );
 					tableEnd();
@@ -271,10 +272,10 @@ function showItems($rallye){
 		fHeader("New item");
 		formStart();
 		tableStart();
-		tableRow("Snippets:", fInput("iSnippets"), "<small>(seperate by comma)</small>");
+		tableRow("Snippets:", fInput("iSnippets"), "<small>(seperate by semicolon)</small>");
 		tableRow("Solution:", fInput("iSolution"));
 		tableRow("Start:", fInput("iStart"), "[YYYY-MM-DD hh:mm:ss]");
-		tableRow("End:", fInput("iEnd"), "[YYYY-MM-DD hh:mm:ss]");
+// 		tableRow("End:", fInput("iEnd"), "[YYYY-MM-DD hh:mm:ss]");
 		tableRow( fInput("addItem", "Add New Item", "submit") );
 		tableEnd();
 		print fInput("rName", $rallye['rName'], "hidden");
