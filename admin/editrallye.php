@@ -271,7 +271,7 @@ function showItems($rallye){
 		fHeader("New item");
 		formStart();
 		tableStart();
-		tableRow("Snippets:", fInput("iSnippets"));
+		tableRow("Snippets:", fInput("iSnippets"), "<small>(seperate by comma)</small>");
 		tableRow("Solution:", fInput("iSolution"));
 		tableRow("Start:", fInput("iStart"), "[YYYY-MM-DD hh:mm:ss]");
 		tableRow("End:", fInput("iEnd"), "[YYYY-MM-DD hh:mm:ss]");

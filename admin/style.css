@@ -1,0 +1,9 @@
+h3{
+	background-color: #EEEEEE;
+	padding: 1%;
+	font-family: monospace;
+}
+
+h3:BEFORE{
+	content: ">> ";
+}

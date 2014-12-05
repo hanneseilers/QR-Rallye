@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>QR-Rallye Administration</title>
+	<link rel="stylesheet" type="text/css" href="style.css"> 
 </head>
 <body>
 
@@ -49,11 +50,9 @@
 	</form>
 </div>
 
-<hr />
 <?php
 	include "newrallye.php";
 ?>
-<hr />
 
 <div>
 	<h3>Edit Rallye</h3>
@@ -80,10 +79,10 @@
 </div>
 
 <hr />
+
 <?php
 	include "editrallye.php";
 ?>
-<hr />
 
 </body>
 </html>
