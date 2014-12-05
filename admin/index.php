@@ -19,10 +19,10 @@
 				<td>Rallye Name*:</td>
 				<td><input type="text" name="rName" value="Name" /></td>
 			</tr>
-			<tr>
-				<td>Rallye Start:</td>
-				<td><input type="text" name="rStart" /> [YYYY-MM-DD hh:mm:ss]</td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td>Rallye Start:</td> -->
+<!-- 				<td><input type="text" name="rStart" /> [YYYY-MM-DD hh:mm:ss]</td> -->
+<!-- 			</tr> -->
 <!-- 			<tr> -->
 <!-- 				<td>Rallye End:</td> -->
 <!-- 				<td><input type="text" name="rEnd" /> [YYYY-MM-DD hh:mm:ss]</td> -->

@@ -15,9 +15,9 @@ if( isset($_POST['update']) ){
 			$vRallye = $vRallye[0];
 			
 			$rStart = $vRallye['rStart'];
-			if( isset($_POST['rStart']) && strlen($_POST['rStart']) == 19 ){
-				$rStart = $_POST['rStart'];
-			}
+// 			if( isset($_POST['rStart']) && strlen($_POST['rStart']) == 19 ){
+// 				$rStart = $_POST['rStart'];
+// 			}
 			
 			$rEnd = $vRallye['rEnd'];
 			if( isset($_POST['rEnd']) && strlen($_POST['rEnd']) == 19 ){
@@ -46,7 +46,7 @@ if( isset($_POST['update']) ){
 			
 			$sql = "UPDATE qr_ralleys SET "
 					."rName = '".$rName."',"
-					."rStart = '".$rStart."',"
+					."rStart = ". ($rStart != null ? "'".$rStart."'" : "NULL") . ","
 					."rEnd = ". ($rEnd != null ? "'".$rEnd."'" : "NULL") . ","
 					."rSnippetsDelay = ".$rSnippetsDelay.","
 					."rPassword = '".$rPassword."',"
@@ -198,7 +198,7 @@ if( isset($_POST['edit']) || isset($_POST['update'])
 				formStart();
 				tableStart();
 				tableRow( "Rallye Name*:",  fInput("rNewName", $vRallye['rName']) );
-				tableRow( "Rallye Start:", fInput("rStart", $vRallye['rStart']), "[YYYY-MM-DD hh:mm:ss]" );
+// 				tableRow( "Rallye Start:", fInput("rStart", $vRallye['rStart']), "[YYYY-MM-DD hh:mm:ss]" );
 // 				tableRow( "Rallye End:", fInput("rEnd", $vRallye['rEnd']), "[YYYY-MM-DD hh:mm:ss]" );
 				tableRow( "Snippets delay:", fInput("rSnippetsDelay", $vRallye['rSnippetsDelay']) );
 				tableRow( "E-Mail*: ", fInput("rNewMail", $vRallye['rMail']) );
