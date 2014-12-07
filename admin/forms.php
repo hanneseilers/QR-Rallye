@@ -9,6 +9,11 @@ function fHeader($title){
 		print "<h3>".$title."</h3>";
 }
 
+function fInfo($msg){
+	if( $msg)
+		print "<div class=\"info\">".$msg."</div>";
+}
+
 function tableStart(){
 	print "<table>";
 }

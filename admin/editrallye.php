@@ -1,3 +1,4 @@
+
 <?php
 
 require_once "../db/db.php";
@@ -5,6 +6,7 @@ require_once "forms.php";
 
 // update rallye settings
 if( isset($_POST['update']) ){
+	show();
 	
 	if( isset($_POST['rName']) && strlen($_POST['rName']) > 2 && isset($_POST['rMail']) ){
 		
@@ -54,23 +56,24 @@ if( isset($_POST['update']) ){
 					."WHERE rID = ".$vRallye['rID'];
 			
 			if( qr_dbSQL($sql) ){
-				print "Rallye ".$rName." data saved";
+				fInfo( "Rallye ".$rName." data saved" );
 				$_POST['rName'] = $rName;
 				$_POST['rMail'] = $rMail;
 			}
 		}
 		
 	} else {
-		print $_POST['rName']." ".$_POST['rMail'];
-		print "Rallye name with min. 3 chars and correct mail adress is required";
+		fInfo( $_POST['rName']." ".$_POST['rMail'] );
+		fInfo( "Rallye name with min. 3 chars and correct mail adress is required" );
 	}
 	
 }
 
-// update rallye settings
+// add rallye item
 if( isset($_POST['addItem']) ){
+	show();
 
-	if( isset($_POST['rName']) && strlen($_POST['rName']) > 2 && isset($_POST['rMail']) ){
+	if( isset($_POST['rName']) && strlen($_POST['rName']) > 2 && isset($_POST['rMail']) ){		
 
 		// get rallye
 		$vRallye = qr_getRallyeByName($_POST['rName'], $_POST['rMail']);
@@ -109,66 +112,74 @@ if( isset($_POST['addItem']) ){
 				if( $vLastItem ){
 					$sql = "INSERT INTO qr_ralleys_has_items (qr_ralleys_rID, qr_items_iID) "
 							."VALUES (".$vRallye['rID'].",".$vLastItem['iID'].")";
-					qr_dbSQL($sql);
+					if( qr_dbSQL($sql) ){
+						fInfo( "Item added" );
+					} else {
+						fInfo( "Adding item failed!" );
+					}
 				}
 			}
 		}
 		
+	} else {
+		fInfo( "Adding item failed!" );
 	}
 	
 }
 
 // update item
-if( isset($_POST['updateItem']) ){	
-	if( isset($_POST['iID']) ){
+if( isset($_POST['updateItem']) && isset($_POST['iID']) ){	
+	show();
 		
-		$vItem = qr_getItem($_POST['iID']);
-		if( $vItem ){			
-			$vItem = $vItem[0];
+	$vItem = qr_getItem($_POST['iID']);
+	if( $vItem ){			
+		$vItem = $vItem[0];
 			
-			if( isset($_POST['removeItem']) ){
+		if( isset($_POST['removeItem']) ){
+			
+			// remove item
+			$sql = "DELETE FROM qr_groups_solved_items WHERE qr_items_iID = ".$vItem['iID'];
+			qr_dbSQL($sql);
+			$sql = "DELETE FROM qr_ralleys_has_items WHERE qr_items_iID = ".$vItem['iID'];
+			qr_dbSQL($sql);
+			$sql = "DELETE FROM qr_items WHERE iID = ".$vItem['iID'];
+			qr_dbSQL($sql);
+			
+		} else {
 				
-				// remove item
-				$sql = "DELETE FROM qr_groups_solved_items WHERE qr_items_iID = ".$vItem['iID'];
-				qr_dbSQL($sql);
-				$sql = "DELETE FROM qr_ralleys_has_items WHERE qr_items_iID = ".$vItem['iID'];
-				qr_dbSQL($sql);
-				$sql = "DELETE FROM qr_items WHERE iID = ".$vItem['iID'];
-				qr_dbSQL($sql);
-				
-			} else {
-				
-				// update item
-				$iSnippets = "";
-				if( isset($_POST['iSnippets']) && strlen($_POST['iSnippets']) > 0 ){
-					$iSnippets = $_POST['iSnippets'];
-				}
-					
-				$iSolution = "";
-				if( isset($_POST['iSolution']) && strlen($_POST['iSolution']) > 0 ){
-					$iSolution = $_POST['iSolution'];
-				}
-					
-				$iStart = $vItem['iStart'];
-				if( isset($_POST['iStart']) && strlen($_POST['iStart']) == 19 ){
-					$iStart = $_POST['iStart'];
-				}
-				
- 				$iEnd = $vItem['iEnd'];
-// 				if( isset($_POST['iEnd']) && strlen($_POST['iEnd']) == 19 ){
-// 					$iEnd = $_POST['iEnd'];
-// 				}
-				
-				$sql = "UPDATE qr_items SET "
-						."iSnippets = '".$iSnippets."',"
-						."iSolution = '".$iSolution."',"
-						."iStart = '".$iStart."',"
-						."iEnd = ".( $iEnd != null ? "'".$iEnd."'" : "NULL" )." "
-						."WHERE iID = ".$vItem['iID'];
-				qr_dbSQL($sql);
-				
+			// update item
+			$iSnippets = "";
+			if( isset($_POST['iSnippets']) && strlen($_POST['iSnippets']) > 0 ){
+				$iSnippets = $_POST['iSnippets'];
 			}
-			
+				
+			$iSolution = "";
+			if( isset($_POST['iSolution']) && strlen($_POST['iSolution']) > 0 ){
+				$iSolution = $_POST['iSolution'];
+			}
+				
+			$iStart = $vItem['iStart'];
+			if( isset($_POST['iStart']) && strlen($_POST['iStart']) == 19 ){
+				$iStart = $_POST['iStart'];
+			}
+				
+ 			$iEnd = $vItem['iEnd'];
+// 			if( isset($_POST['iEnd']) && strlen($_POST['iEnd']) == 19 ){
+// 				$iEnd = $_POST['iEnd'];
+// 			}
+				
+			$sql = "UPDATE qr_items SET "
+					."iSnippets = '".$iSnippets."',"
+					."iSolution = '".$iSolution."',"
+					."iStart = '".$iStart."',"
+					."iEnd = ".( $iEnd != null ? "'".$iEnd."'" : "NULL" )." "
+					."WHERE iID = ".$vItem['iID'];
+			if( qr_dbSQL($sql) ){
+				fInfo( "Item updated" );
+			} else {
+				fInfo( "Updating item failed!" );
+			}
+				
 		}
 		
 	}	
@@ -177,6 +188,7 @@ if( isset($_POST['updateItem']) ){
 // edit rallye
 if( isset($_POST['edit']) || isset($_POST['update'])
 		|| isset($_POST['addItem']) || isset($_POST['updateItem']) ){
+	show();
 
 	if( isset($_POST['rName']) && isset($_POST['rMail']) ){
 
@@ -194,7 +206,7 @@ if( isset($_POST['edit']) || isset($_POST['update'])
 			if( md5($rPassword) == $vRallye['rPassword'] || $rPassword == $vRallye['rPassword'] ){
 
 				// show rallye
-				fHeader( "Rallye: ".$_POST['rName'] );
+				fHeader( "Edit rallye ".$_POST['rName'] );
 				formStart();
 				tableStart();
 				tableRow( "Rallye Name*:",  fInput("rNewName", $vRallye['rName']) );
@@ -221,11 +233,11 @@ if( isset($_POST['edit']) || isset($_POST['update'])
 				showItems($vRallye);
 
 			} else {
-				print "Password not correct!";
+				fInfo( "Password not correct!" );
 			}
 				
 		} else {
-			print "Rallye ".$_POST['rName']." not found.";
+			fInfo( "Rallye ".$_POST['rName']." not found." );
 		}
 
 	}
@@ -236,6 +248,7 @@ if( isset($_POST['edit']) || isset($_POST['update'])
 
 function showItems($rallye){	
 	if( $rallye ){
+		show();
 		
 		// get items
 		$vItemIDs = qr_getRalleyItems($rallye['rID']);
@@ -265,7 +278,7 @@ function showItems($rallye){
 			}
 			
 		} else {
-			print "No items found.";
+			fInfo( "No items found." );
 		}
 		
 		// add new item
@@ -284,6 +297,10 @@ function showItems($rallye){
 		formEnd();
 		
 	}	
+}
+
+function show(){
+	echo '<script type="text/javascript">showElement("editcontent");</script>';
 }
 
 
