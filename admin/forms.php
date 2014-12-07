@@ -45,8 +45,8 @@ function tableRow4($a, $b=null, $c=null, $d=null){
 	print $t."</tr>\n";
 }
 
-function formStart($action="index.php"){
-	print "<form action=\"".$action."\" method=\"post\">";
+function formStart($action="index.php", $target=""){
+	print "<form action=\"".$action."\" method=\"post\" target=\"".$target."\">";
 }
 
 function formEnd(){

@@ -266,7 +266,7 @@ if( isset($_POST['edit']) || isset($_POST['update'])
 				tableEnd();
 				
 				fHeader("Generate QR codes");
-				formStart("generateQR.php");
+				formStart("generateQR.php", "_blanc");
 				print fInput("rID", $vrallye['rID'], "hidden");
 				print "# of codes: ".fInput("n", "10")."<br />";
 				print fInput("genQR", "Generate", "submit");
