@@ -2,7 +2,7 @@
 
 require_once "../db/db.php";
 
-// new ralley
+// new rallye
 if( isset($_POST['new']) ){
 	
 	if( isset($_POST['rName']) && strlen($_POST['rName']) > 2
@@ -28,7 +28,7 @@ if( isset($_POST['new']) ){
 			$rPassword = $_POST['rPassword'];
 		}
 		
-		$sql = "INSERT INTO qr_ralleys (rName, rStart, rEnd, rSnippetsDelay, rPassword, rMail) "
+		$sql = "INSERT INTO qr_rallyes (rName, rStart, rEnd, rSnippetsDelay, rPassword, rMail) "
 				."VALUES ("
 				."'".$_POST['rName']."',"
 				."'".$rStart."',"

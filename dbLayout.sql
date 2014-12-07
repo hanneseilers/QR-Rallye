@@ -7,11 +7,11 @@ CREATE SCHEMA IF NOT EXISTS `DBNAME` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin
 USE `DBNAME` ;
 
 -- -----------------------------------------------------
--- Table `DBNAME`.`qr_ralleys`
+-- Table `DBNAME`.`qr_rallyes`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `DBNAME`.`qr_ralleys` ;
+DROP TABLE IF EXISTS `DBNAME`.`qr_rallyes` ;
 
-CREATE TABLE IF NOT EXISTS `DBNAME`.`qr_ralleys` (
+CREATE TABLE IF NOT EXISTS `DBNAME`.`qr_rallyes` (
   `rID` INT NOT NULL AUTO_INCREMENT,
   `rName` TEXT NOT NULL,
   `rStart` TIMESTAMP NULL,
@@ -52,19 +52,19 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `DBNAME`.`qr_ralleys_has_items`
+-- Table `DBNAME`.`qr_rallyes_has_items`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `DBNAME`.`qr_ralleys_has_items` ;
+DROP TABLE IF EXISTS `DBNAME`.`qr_rallyes_has_items` ;
 
-CREATE TABLE IF NOT EXISTS `DBNAME`.`qr_ralleys_has_items` (
-  `qr_ralleys_rID` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `DBNAME`.`qr_rallyes_has_items` (
+  `qr_rallyes_rID` INT NOT NULL,
   `qr_items_iID` INT NOT NULL,
-  PRIMARY KEY (`qr_ralleys_rID`, `qr_items_iID`),
+  PRIMARY KEY (`qr_rallyes_rID`, `qr_items_iID`),
   INDEX `fk_qr_ralleys_has_qr_items_qr_items1_idx` (`qr_items_iID` ASC),
-  INDEX `fk_qr_ralleys_has_qr_items_qr_ralleys_idx` (`qr_ralleys_rID` ASC),
+  INDEX `fk_qr_ralleys_has_qr_items_qr_ralleys_idx` (`qr_rallyes_rID` ASC),
   CONSTRAINT `fk_qr_ralleys_has_qr_items_qr_ralleys`
-    FOREIGN KEY (`qr_ralleys_rID`)
-    REFERENCES `DBNAME`.`qr_ralleys` (`rID`)
+    FOREIGN KEY (`qr_rallyes_rID`)
+    REFERENCES `DBNAME`.`qr_rallyes` (`rID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_qr_ralleys_has_qr_items_qr_items1`

@@ -16,9 +16,9 @@ if( isset($_GET['f'])  ){
 	$aFunction = $_GET['f'];
 }
 
-$aRalleyID = null;
+$aRallyeID = null;
 if( isset($_GET['rID']) ){
-	$aRalleyID = $_GET['rID'];
+	$aRallyeID = $_GET['rID'];
 }
 
 $aGroupHash = null;
@@ -53,8 +53,8 @@ if( isset($_GET['S']) ){
 switch( $aFunction ){
 	
 	case 1:
-		// Get Ralley information
-		$vData = qr_getRallye($aRalleyID);
+		// Get Rallye information
+		$vData = qr_getRallye($aRallyeID);
 		if( $vData ) {
 			unset( $vData[0]['rPassword'], $vData[0]['rMail'] );
 			print json_encode( $vData[0] );
@@ -62,20 +62,20 @@ switch( $aFunction ){
 		break;
 		
 	case 2:
-		print getPendingSnipped($aRalleyID, $aGroupHash, $aGroupName, $aSnippetNumber);		
+		print getPendingSnipped($aRallyeID, $aGroupHash, $aGroupName, $aSnippetNumber);		
 		break;
 		
 	case 3:
-		print sizeof(qr_getRalleyItems($aRalleyID));
+		print sizeof(qr_getRallyeItems($aRallyeID));
 		break;
 	
 	case 4:
-		print sizeof(qr_getSolvedItems($aRalleyID, $aGroupHash));
+		print sizeof(qr_getSolvedItems($aRallyeID, $aGroupHash));
 		break;
 		
 	case 5:
-		$vItem = qr_getPendingItem($aRalleyID, $aGroupHash);
-		if( !$vItem || qr_submitSolution($aRalleyID, $aGroupHash, $vItem, $aSolution) )
+		$vItem = qr_getPendingItem($aRallyeID, $aGroupHash);
+		if( !$vItem || qr_submitSolution($aRallyeID, $aGroupHash, $vItem, $aSolution) )
 			status($SOLUTION_OK);
 		else status($SOLUTION_FALSE);
 		break;

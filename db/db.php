@@ -30,41 +30,41 @@ function qr_dbSQL($sql){
 }
 
 /**
- * Get information about ralley
- * @param integer $rID	Ralley number.
+ * Get information about rallye
+ * @param integer $rID	Rallye number.
  * @return multitype:
  */
 function qr_getRallye($rID){
 	if( $rID )	
-		return qr_dbSQL("SELECT * FROM qr_ralleys WHERE rID = ".$rID);
+		return qr_dbSQL("SELECT * FROM qr_rallyes WHERE rID = ".$rID);
 }
 
 /**
- * Get information about ralley
+ * Get information about rallye
  * @param string $rName
  * @param string $rMail
  * @return multiple
  */
 function qr_getRallyeByName($rName, $rMail){
 	if( $rName && $rMail )
-		return qr_dbSQL("SELECT * FROM qr_ralleys WHERE rName = '".$rName."' AND rMail = '".$rMail."'");
+		return qr_dbSQL("SELECT * FROM qr_rallyes WHERE rName = '".$rName."' AND rMail = '".$rMail."'");
 }
 
 /**
- * Gets the currently pending, unsolved item of a group in a ralley.
+ * Gets the currently pending, unsolved item of a group in a rallye.
  * @param integer $rID	Rallley ID
  * @param integer $gID	Group ID
  * @return multitype:
  */
 function qr_getPendingItem($rID, $gID){
 	if( $rID && $gID ){
-		// select item of group in ralley that is not solved
-		$vResult = qr_dbSQL("SELECT qr_ralleys_has_items.qr_items_iID FROM qr_ralleys_has_items "
+		// select item of group in rallye that is not solved
+		$vResult = qr_dbSQL("SELECT qr_rallyes_has_items.qr_items_iID FROM qr_rallyes_has_items "
 				."LEFT OUTER JOIN qr_groups_solved_items "
-				."ON (qr_ralleys_has_items.qr_items_iID = qr_groups_solved_items.qr_items_iID) "
+				."ON (qr_rallyes_has_items.qr_items_iID = qr_groups_solved_items.qr_items_iID) "
 				."WHERE qr_groups_solved_items.qr_items_iID IS NULL "
-				."AND qr_ralleys_has_items.qr_ralleys_rID = ".$rID." "
-				."ORDER BY qr_ralleys_has_items.qr_items_iID ASC");
+				."AND qr_rallyes_has_items.qr_rallyes_rID = ".$rID." "
+				."ORDER BY qr_rallyes_has_items.qr_items_iID ASC");
 		if( $vResult ) return $vResult[0];
 	}
 }
@@ -90,14 +90,14 @@ function qr_getLastItem(){
 }
 
 /**
- * Checks if item is connected to a ralley.
- * @param integer $rID	Ralley ID
+ * Checks if item is connected to a rallye.
+ * @param integer $rID	Rallye ID
  * @param integer $iID	Item ID
  * @return boolean
  */
-function qr_isItemInRalley($rID, $iID){
+function qr_isItemInRallye($rID, $iID){
 	if( $rID && $iID ){
-		return sizeof( qr_dbSQL("SELECT * FROM qr_ralleys_has_items WHERE qr_ralleys_rID = ".$rID
+		return sizeof( qr_dbSQL("SELECT * FROM qr_rallyes_has_items WHERE qr_rallyes_rID = ".$rID
 			." AND qr_items_iID = ".$iID) ) > 0;
 	}	
 	return false;
@@ -161,16 +161,16 @@ function qr_getGroupID($gHash){
 }
 
 /**
- * Gets the solved snippets of a group for a ralley.
- * @param integer $rID	Ralley ID
+ * Gets the solved snippets of a group for a rallye.
+ * @param integer $rID	Rallye ID
  * @param integer $gID	Group ID
  */
 function qr_getSolvedSnippets($rID, $gHash){
 	if( $rID && $gHash && ($gID = qr_getGroupID($gHash)) > 0 ){
 		// get all solved items
 		$vSolvedItems = qr_dbSQL("SELECT * FROM qr_groups_solved_items "
-				."JOIN qr_ralleys_has_items "
-				."ON qr_groups_solved_items.qr_items_iID =  qr_ralleys_has_items.qr_items_iID ".
+				."JOIN qr_rallyes_has_items "
+				."ON qr_groups_solved_items.qr_items_iID =  qr_rallyes_has_items.qr_items_iID ".
 				"WHERE qr_groups_solved_items.qr_groups_gID = ".$gID." "
 				."ORDER BY qr_groups_solved_items.giSolvedAt DESC");
 		if( $vSolvedItems )
@@ -181,17 +181,17 @@ function qr_getSolvedSnippets($rID, $gHash){
 }
 
 /**
- * Gets item IDs of a ralley
+ * Gets item IDs of a rallye
  * @param integer $rID
  * @return array
  */
-function qr_getRalleyItems($rID){
+function qr_getRallyeItems($rID){
 	if( $rID )
-		return qr_dbSQL("SELECT qr_items_iID FROM qr_ralleys_has_items WHERE qr_ralleys_rID = ".$rID);
+		return qr_dbSQL("SELECT qr_items_iID FROM qr_rallyes_has_items WHERE qr_rallyes_rID = ".$rID);
 }
 
 /**
- * Gets all solved items for a group in a ralley.
+ * Gets all solved items for a group in a rallye.
  * @param integer $rID
  * @param integer $gID
  * @return array
@@ -199,15 +199,15 @@ function qr_getRalleyItems($rID){
 function qr_getSolvedItems($rID, $gHash){
 	if( $rID && $gHash && ($gID = qr_getGroupID($gHash)) > 0 )
 		return qr_dbSQL("SELECT * FROM qr_groups_solved_items "
-				."JOIN qr_ralleys_has_items "
-				."ON qr_groups_solved_items.qr_items_iID = qr_ralleys_has_items.qr_items_iID "
-				."WHERE qr_ralleys_has_items.qr_ralleys_rID = ".$rID." "
+				."JOIN qr_rallyes_has_items "
+				."ON qr_groups_solved_items.qr_items_iID = qr_rallyes_has_items.qr_items_iID "
+				."WHERE qr_rallyes_has_items.qr_rallyes_rID = ".$rID." "
 				."AND qr_groups_solved_items.qr_groups_gID = ".$gID);
 }
 
 /**
  * Submitting a solution for the current pending, unsolved item.
- * @param integer $rID		Ralley ID
+ * @param integer $rID		Rallye ID
  * @param integer $gID		Group ID
  * @param mixed $vItem		Item to add solution for.
  * @param string $solution	Solution
