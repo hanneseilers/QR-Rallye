@@ -185,7 +185,9 @@ if( isset($_POST['updateItem']) && isset($_POST['iID']) ){
 			$sql = "DELETE FROM qr_rallyes_has_items WHERE qr_items_iID = ".$vItem['iID'];
 			qr_dbSQL($sql);
 			$sql = "DELETE FROM qr_items WHERE iID = ".$vItem['iID'];
-			qr_dbSQL($sql);
+			if( qr_dbSQL($sql) ){
+				fInfo( "Item removed" );
+			} 
 			
 		} else {
 				

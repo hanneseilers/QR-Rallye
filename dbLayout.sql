@@ -14,8 +14,6 @@ DROP TABLE IF EXISTS `DBNAME`.`qr_rallyes` ;
 CREATE TABLE IF NOT EXISTS `DBNAME`.`qr_rallyes` (
   `rID` INT NOT NULL AUTO_INCREMENT,
   `rName` TEXT NOT NULL,
-  `rStart` TIMESTAMP NULL,
-  `rEnd` TIMESTAMP NULL,
   `rSnippetsDelay` DOUBLE NULL,
   `rPassword` LONGTEXT NULL,
   `rMail` LONGTEXT NOT NULL,
@@ -33,7 +31,6 @@ CREATE TABLE IF NOT EXISTS `DBNAME`.`qr_items` (
   `iSnippets` LONGTEXT NOT NULL,
   `iSolution` LONGTEXT NOT NULL,
   `iStart` TIMESTAMP NULL,
-  `iEnd` TIMESTAMP NULL,
   PRIMARY KEY (`iID`))
 ENGINE = InnoDB;
 
