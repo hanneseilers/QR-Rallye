@@ -15,6 +15,7 @@
 	
 	<div class="menuitem"><a onclick="showElement('add');">Add new Rallye</a></div>
 	<div class="menuitem"><a onclick="showElement('edit');">Edit Rallye</a></div>
+	<div class="menuitem"><a href="index.php?groups">Show groups</a></div>
 		
 </div>
 
@@ -92,6 +93,12 @@
 	<div id="editcontent" class="hidden">
 	<?php
 		include "editrallye.php";
+	?>
+	</div>
+	
+	<div id="groups" class="hidden">
+	<?php
+		include "groups.php";
 	?>
 	</div>
 

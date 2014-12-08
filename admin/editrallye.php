@@ -6,7 +6,7 @@ require_once "forms.php";
 
 // update rallye settings
 if( isset($_POST['update']) ){
-	show();
+	showEdit();
 	
 	if( isset($_POST['rName']) && strlen($_POST['rName']) > 2 && isset($_POST['rMail']) ){
 		
@@ -59,7 +59,7 @@ if( isset($_POST['update']) ){
 
 // remove rallye
 if( isset($_POST['remove']) ){
-	show();
+	showEdit();
 	
 	if( isset($_POST['rName']) && strlen($_POST['rName']) > 2 && isset($_POST['rMail']) ){
 	
@@ -119,7 +119,7 @@ if( isset($_POST['remove']) ){
 
 // add rallye item
 if( isset($_POST['addItem']) ){
-	show();
+	showEdit();
 
 	if( isset($_POST['rName']) && strlen($_POST['rName']) > 2 && isset($_POST['rMail']) ){		
 
@@ -171,7 +171,7 @@ if( isset($_POST['addItem']) ){
 
 // update item
 if( isset($_POST['updateItem']) && isset($_POST['iID']) ){	
-	show();
+	showEdit();
 		
 	$vItem = qr_getItem($_POST['iID']);
 	if( $vItem ){			
@@ -226,7 +226,7 @@ if( isset($_POST['updateItem']) && isset($_POST['iID']) ){
 // edit rallye
 if( isset($_POST['edit']) || isset($_POST['update'])
 		|| isset($_POST['addItem']) || isset($_POST['updateItem']) ){
-	show();
+	showEdit();
 
 	if( isset($_POST['rName']) && isset($_POST['rMail']) ){
 
@@ -293,7 +293,7 @@ if( isset($_POST['edit']) || isset($_POST['update'])
 
 function showItems($rallye){	
 	if( $rallye ){
-		show();
+		showEdit();
 		
 		// get items
 		$vItemIDs = qr_getRallyeItems($rallye['rID']);
@@ -342,7 +342,7 @@ function showItems($rallye){
 	}	
 }
 
-function show(){
+function showEdit(){
 	echo '<script type="text/javascript">showElement("editcontent");</script>';
 }
 
