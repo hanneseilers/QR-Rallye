@@ -47,7 +47,7 @@ if( isset($_GET['S']) ){
  * 	2	Get next snippet from		(rID, gHash, gName, snippetNr)
  * 		unsolved item 		
  * 	3	Get number of items 		(rID)
- * 	4	Get number of solved items	(rID, gHash, gName)
+ * 	4	Get number of solved items	(rID, gHash)
  * 	5	Submit solution				(rID, gHash, gName, itemSolution)
  */
 switch( $aFunction ){
@@ -66,11 +66,11 @@ switch( $aFunction ){
 		break;
 		
 	case 3:
-		print sizeof(qr_getRallyeItems($aRallyeID));
+		print count(qr_getRallyeItems($aRallyeID));
 		break;
 	
 	case 4:
-		print sizeof(qr_getSolvedItems($aRallyeID, $aGroupHash));
+		print count(qr_getSolvedItems($aRallyeID, $aGroupHash));
 		break;
 		
 	case 5:
