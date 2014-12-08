@@ -75,6 +75,9 @@ switch( $aFunction ){
 		
 	case 5:
 		$vItem = qr_getPendingItem($aRallyeID, $aGroupHash);
+		if( $aGroupName && $aGroupHash ){
+			qr_updateGroup($gHash, $gName);
+		}
 		if( !$vItem || qr_submitSolution($aRallyeID, $aGroupHash, $vItem, $aSolution) )
 			status($SOLUTION_OK);
 		else status($SOLUTION_FALSE);
