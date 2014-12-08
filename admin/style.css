@@ -14,6 +14,13 @@ body{
 	overflow: auto;
 }
 
+.menu img{
+	position: absolute;
+	bottom: 1%;
+	width: 40%;
+	left: 30%;
+}
+
 .menuitem{
 	background-color: #742a9f;
 	padding: 1%;

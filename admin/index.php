@@ -16,6 +16,8 @@
 	<div class="menuitem"><a onclick="showElement('add');">Add new Rallye</a></div>
 	<div class="menuitem"><a onclick="showElement('edit');">Edit Rallye</a></div>
 	<div class="menuitem"><a href="index.php?groups">Show groups</a></div>
+	
+	<a href="https://play.google.com/store/apps/details?id=de.hanneseilers.qrrallye" target="_blanc"><img src="ic_launcher-web.png"></a>
 		
 </div>
 
